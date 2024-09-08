@@ -12,15 +12,12 @@ export const validationMixin = {
     methods: {
         validateFields() {
             let isValid = true;
-
-
             if (!this.email || !this.email.includes('@')) {
                 this.emailError = 'Введите корректный email.';
                 isValid = false;
             } else {
                 this.emailError = '';
             }
-
             if (this.password.length < 5) {
                 this.passwordError = 'Пароль должен содержать минимум 5 символов.';
                 isValid = false;

@@ -1,19 +1,13 @@
+
 <template>
   <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" style="z-index: 1000;">
     <div class="bg-white p-8 rounded-lg max-w-md w-full relative">
-      <!-- Дз 7 - базовый слот -->
-      <!-- дз 7 - слот для header -->
       <slot name="header">
-        <!-- дз 7 - слот с Фолбек Контентом -->
         <h2 class="text-xl font-bold mb-4">Вход на сайт</h2>
       </slot>
-      <!-- Дз 7 - именованный слот -->
-      <!-- дз 7 слот для body -->
+
       <slot name="body">
         <form @submit.prevent="handleSubmit">
-          <div v-if="firebaseError" class="mb-4">
-            <p class="text-red-500">{{ firebaseError }}</p>
-          </div>
           <div class="mb-4">
             <label class="block text-gray-700">Email</label>
             <input v-model="email" type="text" class="border w-full p-2 mt-2 rounded" />
@@ -26,7 +20,7 @@
           </div>
         </form>
       </slot>
-      <!-- дз 7 слот для footer -->
+
       <slot name="footer">
         <div class="flex items-center justify-between">
           <button type="submit" @click="handleSubmit" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold px-6 py-2 shadow-lg hover:shadow-xl focus:outline-none transition-transform duration-200 ease-in-out transform hover:scale-105">
@@ -50,16 +44,6 @@ import { validationMixin } from "@/mixins/validationMixin.js";
 
 export default {
   name: "LoginModal",
-  data() {
-    return {
-      email: "",
-      password: "",
-      emailError: "",
-      passwordError: "",
-      firebaseError: "",
-      submitted: false,
-    };
-  },
   mixins: [closeEvent, lifecycleMixin, validationMixin],
   methods: {
     handleCancel() {
@@ -67,17 +51,13 @@ export default {
       this.closeModal();
     },
     resetForm() {
-      this.email = "";
       this.password = "";
       this.emailError = "";
       this.passwordError = "";
-      this.firebaseError = "";
       this.submitted = false;
     },
     handleSubmit() {
       this.submitted = true;
-      this.firebaseError = "";
-
       if (this.validateFields()) {
         const auth = getAuth();
         signInWithEmailAndPassword(auth, this.email, this.password)
@@ -90,17 +70,10 @@ export default {
               this.checkUser();
             })
             .catch((error) => {
-
-              if (error.code === 'auth/wrong-password') {
-                this.firebaseError = "Неверный пароль.";
-              } else if (error.code === 'auth/user-not-found') {
-                this.firebaseError = "Пользователь с таким email не найден.";
-              } else {
-                this.firebaseError = "Ошибка входа. Попробуйте еще раз.";
-              }
+              alert(error.message);
             });
       }
-    },
-  },
+    }
+  }
 };
 </script>

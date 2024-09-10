@@ -25,7 +25,7 @@ export const validationMixin = {
                 this.passwordError = '';
             }
 
-            return isValid;
+            return isValid; // Возвращаем результат валидации
         }
     }
 };

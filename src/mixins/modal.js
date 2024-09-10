@@ -31,7 +31,7 @@ export default {
             });
 
             modal.on("accept-logout", () => {
-                // дз 6 номер 6 комбинируются несколько stores
+                // Комбинация store для управления пользователем дз 6 номер 6
                 useUserStore().removeUser();
                 this.user = null;
                 this.checkUser();
@@ -57,7 +57,7 @@ export default {
             }
         },
         checkUser() {
-            // дз 6 номер 3 - Вивели данные из свого store в компонент Vue.
+            // дз 6 номер 3 - Вивели данные из своего store в компонент Vue.
             const userStore = useUserStore();
             this.user = userStore.initAuthUser();
         },

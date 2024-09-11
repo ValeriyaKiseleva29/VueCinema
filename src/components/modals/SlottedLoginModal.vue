@@ -2,14 +2,17 @@
   <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" style="z-index: 1000;">
     <div class="bg-white p-8 rounded-lg max-w-md w-full relative">
       <!-- Дз 7 - базовый слот -->
-      <!-- дз 7 - слот для header -->
+      <slot>
+        <p>Привет, войдите на сайт!</p> <!-- Базовый слот с фолбек контентом -->
+      </slot>
+
+      <!-- Дз 7 - слот для header -->
       <slot name="header">
-        <!-- дз 7 - слот с Фолбек Контентом -->
+        <!-- Дз 7 - слот с Фолбек Контентом -->
         <h2 class="text-xl font-bold mb-4">Вход на сайт</h2>
       </slot>
 
-      <!-- Дз 7 - именованный слот -->
-      <!-- дз 7 слот для body -->
+      <!-- Дз 7 - именованный слот для body -->
       <slot name="body">
         <form @submit.prevent="handleSubmit">
           <div class="mb-4">
@@ -25,7 +28,7 @@
         </form>
       </slot>
 
-      <!-- дз 7 слот для footer -->
+      <!-- Дз 7 - слот для footer -->
       <slot name="footer">
         <div class="flex items-center justify-between">
           <button type="submit" @click="handleSubmit" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold px-6 py-2 shadow-lg hover:shadow-xl focus:outline-none transition-transform duration-200 ease-in-out transform hover:scale-105">
@@ -48,7 +51,7 @@ import { lifecycleMixin } from "@/mixins/lifecycleMixin.js";
 import { validationMixin } from "@/mixins/validationMixin.js";
 
 export default {
-  name: "LoginModal",
+  name: "SlottedLoginModal",
   mixins: [closeEvent, lifecycleMixin, validationMixin],
   methods: {
     handleCancel() {
